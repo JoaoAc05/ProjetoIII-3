@@ -17,3 +17,5 @@ function normalizaPort(val) {
 app.listen(port, function () {
     console.log(`Servidor rodando na porta ${port}`)
 })
+
+//Código criado por  João Alves Cordeiro - Aluno de Análise e Desenvolvimento de Sistemas (ADS) UNIFASIPE.

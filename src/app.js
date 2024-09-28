@@ -12,3 +12,5 @@ app.use(express.json());
 app.use('/', index);
 
 export default app ;
+
+//Código criado por ©João Alves Cordeiro - Aluno de Análise e Desenvolvimento de Sistemas (ADS) UNIFASIPE.
