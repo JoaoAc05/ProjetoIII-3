@@ -88,7 +88,7 @@ class usuarioController {
 
     async deletar(req, res, next) {
         const { indice } = req.params;
-        try {
+        try { 
             const deleteUsuarios = await prisma.Usuario.deleteMany({
                 where: { 
                     indice: Number(indice), 
