@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./bin/server.js",
-    "build": "prisma generate && next build"
+    "build": "chmod +x ./node_modules/.bin/prisma && prisma generate && next build"
   },
   "keywords": [],
   "author": "",
