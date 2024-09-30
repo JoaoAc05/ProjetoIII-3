@@ -20,5 +20,3 @@ model Aluno {
   status Int @default(0)
   hora_post DateTime?
 }
-
-//voltando do 0
