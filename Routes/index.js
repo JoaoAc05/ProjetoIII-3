@@ -1,15 +1,13 @@
 import express from "express";
-import { UsuarioRouter } from "./UsuarioRouter.js";
+import { AlunoRouter } from "./AlunoRouter.js";
 
 const router = express.Router();
 router.get('/', (req, res, next) => {
     res.json({
         "statuscode": 200,
-        "sucesso": "Rota default - ProjetoIII V3.0"
+        "sucesso": "Rota default - ProjetoIII V2"
     });
 });
-router.use("/usuario", UsuarioRouter);
+router.use("/aluno", AlunoRouter);
 
 export default router;
-
-//Código criado por  João Alves Cordeiro - Aluno de Análise e Desenvolvimento de Sistemas (ADS) UNIFASIPE.
