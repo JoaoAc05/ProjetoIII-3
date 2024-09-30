@@ -4,9 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/server.js",
-    "build": "prisma generate && next build",
-    "postinstall": "prisma generate"
+    "start": "nodemon ./bin/server.js"
   },
   "keywords": [],
   "author": "",
