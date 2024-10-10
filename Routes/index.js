@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
     res.json({
         "statuscode": 200,
-        "sucesso": "Rota default - ProjetoIII V3"
+        "sucesso": "Rota default - ProjetoIII V3.0"
     });
 });
 router.use("/aluno", AlunoRouter);
