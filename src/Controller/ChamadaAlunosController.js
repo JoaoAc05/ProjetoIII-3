@@ -1,6 +1,6 @@
 import { prisma } from "../prisma.js";
 
-class chamadaAlunoController {
+class chamadaAlunosController {
     async presenca (req, res, next) {
         const { hora_post, ...presencaData } = req.body; // subdivide os dados 2 dois, sendo a hora do post e o restante do req
 
@@ -35,4 +35,4 @@ class chamadaAlunoController {
     }
     }
 }
-export { usuarioController };
+export { chamadaAlunosController };

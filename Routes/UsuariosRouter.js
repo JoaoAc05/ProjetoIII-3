@@ -2,7 +2,7 @@ import express from "express";
 import { usuariosController } from "../src/Controller/UsuariosController.js";
 
 const UsuariosRouter = express.Router();
-const UsuariosController = new usuarioController();
+const UsuariosController = new usuariosController();
 
 //Rotas Usuário (/Usuario)
 UsuariosRouter.get('/', UsuariosController.getAll); // Select *
