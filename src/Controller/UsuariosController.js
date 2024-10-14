@@ -72,7 +72,7 @@ class usuariosController {
             })
             res.status(200).json({message: 'Usuario deletado com sucesso.'})
         } catch (e) {
-            res.status(500).json({message: 'Erro ao deletar usuario.' + e.message})
+            res.status(500).json({message: 'Erro ao deletar usuario. ' + e.message})
         }
     }
 
@@ -124,7 +124,7 @@ class usuariosController {
             }
  
         } catch (e) {
-            return res.status(500).json({ message: 'Erro interno no servidor' + e.message});
+            return res.status(500).json({ message: 'Erro interno no servidor ' + e.message});
         }
 
     }
