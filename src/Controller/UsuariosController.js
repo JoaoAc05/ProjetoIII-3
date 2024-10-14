@@ -1,6 +1,6 @@
 import { prisma } from "../prisma.js";
 
-class usuarioController {
+class usuariosController {
     async getAll(req, res, next) { 
         try {
             const usuarios = await prisma.usuario.findMany()
@@ -130,4 +130,4 @@ class usuarioController {
     }
 
 }
-export { usuarioController };
+export { usuariosController };

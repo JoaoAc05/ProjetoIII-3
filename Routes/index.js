@@ -1,5 +1,5 @@
 import express from "express";
-import { UsuarioRouter } from "./UsuarioRouter.js";
+import { UsuariosRouter } from "./UsuariosRouter.js";
 
 const router = express.Router();
 
@@ -11,6 +11,6 @@ router.get('/', (req, res, next) => {
     });
 });
 //router.use("/aluno", AlunoRouter);   V 2.0
-router.use("/usuario", UsuarioRouter)
+router.use("/usuarios", UsuariosRouter)
 
 export default router;
