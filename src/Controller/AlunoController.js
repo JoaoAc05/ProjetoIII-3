@@ -12,12 +12,12 @@ class alunoController {
 
     async getId(req, res, next) {
         const {
-            indice
+            id
         } = req.params;
         try {
             const aluno = await prisma.Aluno.findUnique({
                 where: {
-                    indice: Number(indice),
+                    id: Number(id),
                 },
             })
             res.status(200).json(aluno)
@@ -57,12 +57,12 @@ class alunoController {
             res.status(201).json({sucess: "Presença Registrada! Boa aula."});
         } catch (e) {
             //res.status(500).json({ error: 'Erro ao criar aluno: ' + e.message });
-            res.status(500).json({ error: 'Erro no servidor:   ' + e});
+            res.status(500).json({ error: 'Erro no servidor:   ' + e.message});
         }
     }
 
     async alterar(req, res, next) {
-        const { indice } = req.body;
+        const { id } = req.body;
         const dataToUpdate = req.body;
     
         // Verifica se o body está vazio
@@ -73,7 +73,7 @@ class alunoController {
         try {
             const updateAlunos = await prisma.Aluno.updateMany({
                 where: {
-                    indice: Number(indice),
+                    id: Number(id),
                 },
                 data: dataToUpdate,  // Passa diretamente o req.body
             });
@@ -89,11 +89,11 @@ class alunoController {
     }
 
     async deletar(req, res, next) {
-        const { indice } = req.params;
+        const { id } = req.params;
         try {
             const deleteAlunos = await prisma.Aluno.deleteMany({
                 where: { 
-                    indice: Number(indice), 
+                    id: Number(id), 
                 },
             })
             res.status(200).json({sucesso: 'Aluno deletado com sucesso.'})

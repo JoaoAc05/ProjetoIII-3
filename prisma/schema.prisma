@@ -18,7 +18,7 @@ model Usuario {
   cpf           String    @unique
   senha         String
   email         String    @unique
-  imei          String?
+  imei          String?   @unique
   tipo          Int @default(0) // 0 - Aluno , 1 - Professor , 2 - Gerencial
   status        Int @default(0) // 0 - Ativo , 1 - Inativo
   data_cadastro DateTime?

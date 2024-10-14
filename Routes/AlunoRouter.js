@@ -6,9 +6,9 @@ const AlunoController = new alunoController();
 
 //Rotas Usuário (/aluno)
 AlunoRouter.get('/', AlunoController.getAll); // Select *
-AlunoRouter.get('/:indice', AlunoController.getId); //Select * where id =
-AlunoRouter.post('/', AlunoController.cadastro); // Insert
-AlunoRouter.put('/:indice', AlunoController.alterar); // Alter
-AlunoRouter.delete('/:indice', AlunoController.deletar); //Delete
+AlunoRouter.get('/:id', AlunoController.getId); //Select * where id =
+AlunoRouter.post('/', AlunoController.cadastro); //Insert
+AlunoRouter.put('/:id', AlunoController.alterar); //Alter
+AlunoRouter.delete('/:id', AlunoController.deletar); //Delete
 
 export { AlunoRouter };

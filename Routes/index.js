@@ -1,5 +1,5 @@
 import express from "express";
-import { AlunoRouter } from "./AlunoRouter.js";
+import { UsuarioRouter } from "./UsuarioRouter.js";
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
         "sucesso": "Rota default - ProjetoIII V3.0"
     });
 });
-router.use("/aluno", AlunoRouter);
+//router.use("/aluno", AlunoRouter);   V 2.0
+router.use("/usuario", UsuarioRouter)
 
 export default router;
