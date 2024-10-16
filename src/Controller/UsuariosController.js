@@ -111,7 +111,7 @@ class usuariosController {
                     },
                 });
     
-                return res.status(201).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
+                return res.status(200).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
     
             } else if (imei === usuario.imei) {
                 // IMEI já cadastrado no banco de dados
@@ -120,6 +120,38 @@ class usuariosController {
                 // IMEI diferente ou inválido
                 return res.status(401).json({ message: 'IMEI diferente do usuário ou inválido.' });
             }
+    
+        } catch (e) {
+            // Erro interno do servidor
+            return res.status(500).json({ message: 'Erro interno no servidor: ' + e.message });
+        }
+    }
+
+    async loginWeb(req, res, next) {
+        const { email, senha } = req.body;
+    
+        try {
+            // Verifica se os campos estão preenchidos
+            if (!email || !senha) {
+                return res.status(400).json({ message: 'Email e senha são obrigatórios.' });
+            }
+    
+            // Consulta o banco de dados para verificar se o email existe
+            const usuario = await prisma.usuario.findUnique({
+                where: { email: email },
+            });
+    
+            // Se o email não for encontrado, retorna um erro
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuário não encontrado. Verifique seu email e senha!' });
+            }
+    
+            // Compara a senha da req com a senha do banco de dados
+            if (senha !== usuario.senha) {
+                return res.status(401).json({ message: 'Senha incorreta.' });
+            }
+
+            return res.status(200).json({ message: 'Login bem-sucedido.' });
     
         } catch (e) {
             // Erro interno do servidor
