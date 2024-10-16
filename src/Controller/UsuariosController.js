@@ -12,12 +12,12 @@ class usuariosController {
 
     async getId(req, res, next) {
         const {
-            indice
+            id
         } = req.params;
         try {
             const usuario = await prisma.usuario.findUnique({
                 where: {
-                    indice: Number(indice),
+                    id: Number(id),
                 },
             })
             res.status(200).json(usuario)
@@ -36,7 +36,7 @@ class usuariosController {
     }
 
     async alterar(req, res, next) {
-        const { indice } = req.body;
+        const { id } = req.body;
         const dataToUpdate = req.body;
     
         // Verifica se o body está vazio
@@ -47,7 +47,7 @@ class usuariosController {
         try {
             const updateUsuarios = await prisma.usuario.updateMany({
                 where: {
-                    indice: Number(indice),
+                    id: Number(id),
                 },
                 data: dataToUpdate,  // Passa diretamente o req.body
             });
@@ -63,11 +63,11 @@ class usuariosController {
     }
 
     async deletar(req, res, next) {
-        const { indice } = req.params;
+        const { id } = req.params;
         try {
             const deleteUsuarios = await prisma.usuario.deleteMany({
                 where: { 
-                    indice: Number(indice), 
+                    id: Number(id), 
                 },
             })
             res.status(200).json({message: 'Usuario deletado com sucesso.'})
@@ -120,7 +120,7 @@ class usuariosController {
             } else if (imei == usuario.imei) {
                 return res.status(200).json({ message: 'Login bem-sucedido - IMEI já cadastrado' });   
             } else {
-                return res.status(400).json({ message: "IMEI diferente do usuario ou inválido."})
+                return res.status(401).json({ message: "IMEI diferente do usuario ou inválido."})
             }
  
         } catch (e) {

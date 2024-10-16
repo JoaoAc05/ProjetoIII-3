@@ -2,7 +2,7 @@
 
 generator client {
   provider        = "prisma-client-js"
-  binaryTargets   = ["native", "rhel-openssl-3.0.x"]
+  binaryTargets = ["native", "windows", "rhel-openssl-3.0.x"]
   //previewFeatures = ["driverAdapters"]
 }
 
@@ -22,7 +22,7 @@ model Usuario {
   imei          String?   @unique // Codigo indicador único do dispositivo
   tipo          Int @default(0) // 0 - Aluno , 1 - Professor , 2 - Gerencial
   status        Int @default(0) // 0 - Ativo , 1 - Inativo
-  data_cadastro DateTime?
+  data_cadastro DateTime @default(now())
 
   // Relacionamentos
   TurmaAluno                TurmaAlunos[]
