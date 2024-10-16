@@ -76,57 +76,60 @@ class usuariosController {
         }
     }
 
-    async loginAluno (req, res, next) {
-        const { imei } = req.body;
-        const { email, senha } = req.body;
-
+    async loginAluno(req, res, next) {
+        const { imei, email, senha } = req.body;
+    
         try {
             // Verifica se os campos estão preenchidos
             if (!email || !senha) {
                 return res.status(400).json({ message: 'Email e senha são obrigatórios.' });
             }
-
+    
             // Consulta o banco de dados para verificar se o email existe
             const usuario = await prisma.usuario.findUnique({
-            where: { email: email }
+                where: { email: email },
             });
+    
             // Se o email não for encontrado, retorna um erro
             if (!usuario) {
-                return res.status(404).json({ message: 'Usuário não encontrado' });
+                return res.status(404).json({ message: 'Usuário não encontrado.' });
             }
-            //Compara a senha da req com a senha do banco de dados
+    
+            // Compara a senha da req com a senha do banco de dados
             if (senha !== usuario.senha) {
-                return res.status(401).json({ message: 'Senha incorreta' });
+                return res.status(401).json({ message: 'Senha incorreta.' });
             }
-
-            if(!usuario.imei) {
-                //não possui imei no banco
+    
+            // Se o usuário não possui IMEI, atualiza o IMEI
+            if (!usuario.imei) {
                 const updateImei = await prisma.usuario.updateMany({
-                where: {
-                    email: email,
-                    senha: senha,
-                },
-                data: {
-                    imei: imei,  // Passa o IMEI como um campo do objeto data
-                },
+                    where: {
+                        email: email,
+                        senha: senha,
+                    },
+                    data: {
+                        imei: imei,
+                    },
                 });
-
+    
                 if (updateImei.count === 0) {
-                return res.status(404).json({ message: 'Usuario não encontrado para inserir IMEI.' });
+                    return res.status(404).json({ message: 'Usuário não encontrado para inserir IMEI.' });
                 }
-
-                return res.status(201).json({ message: 'Login bem-sucedido' });
-
-            } else if (imei == usuario.imei) {
-                return res.status(200).json({ message: 'Login bem-sucedido - IMEI já cadastrado' });   
+    
+                return res.status(201).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
+    
+            } else if (imei === usuario.imei) {
+                // IMEI já cadastrado no banco de dados
+                return res.status(200).json({ message: 'Login bem-sucedido. IMEI já cadastrado.' });
             } else {
-                return res.status(401).json({ message: "IMEI diferente do usuario ou inválido."})
+                // IMEI diferente ou inválido
+                return res.status(401).json({ message: 'IMEI diferente do usuário ou inválido.' });
             }
- 
+    
         } catch (e) {
-            return res.status(500).json({ message: 'Erro interno no servidor ' + e.message});
+            // Erro interno do servidor
+            return res.status(500).json({ message: 'Erro interno no servidor: ' + e.message });
         }
-
     }
 
 }
