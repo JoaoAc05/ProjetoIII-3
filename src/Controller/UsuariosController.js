@@ -102,19 +102,14 @@ class usuariosController {
     
             // Se o usuário não possui IMEI, atualiza o IMEI
             if (!usuario.imei) {
-                const updateImei = await prisma.usuario.updateMany({
+                const updateImei = await prisma.usuario.update({
                     where: {
                         email: email,
-                        senha: senha,
                     },
                     data: {
                         imei: imei,
                     },
                 });
-    
-                if (updateImei.count === 0) {
-                    return res.status(404).json({ message: 'Usuário não encontrado para inserir IMEI.' });
-                }
     
                 return res.status(201).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
     
