@@ -87,7 +87,7 @@ class usuariosController {
             }
 
             // Consulta o banco de dados para verificar se o email existe
-            const usuario = await prisma.Usuario.findUnique({
+            const usuario = await prisma.usuario.findUnique({
             where: { email: email }
             });
             // Se o email não for encontrado, retorna um erro
@@ -95,9 +95,7 @@ class usuariosController {
                 return res.status(404).json({ message: 'Usuário não encontrado' });
             }
             //Compara a senha da req com a senha do banco de dados
-            const validaSenha = await compare(senha, usuario.senha);
-
-            if (!validaSenha) {
+            if (senha !== usuario.senha) {
                 return res.status(401).json({ message: 'Senha incorreta' });
             }
 
@@ -108,7 +106,7 @@ class usuariosController {
                     email: email,
                     senha: senha,
                 },
-                data: imei,  // Passa diretamente o req.body
+                data: imei,  // Passa diretamente o imei do req.body
                 });
 
                 if (updateImei.count === 0) {
