@@ -106,7 +106,9 @@ class usuariosController {
                     email: email,
                     senha: senha,
                 },
-                data: imei,  // Passa diretamente o imei do req.body
+                data: {
+                    imei: imei,  // Passa o IMEI como um campo do objeto data
+                },
                 });
 
                 if (updateImei.count === 0) {
