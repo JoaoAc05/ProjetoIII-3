@@ -1,24 +1,15 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Aluno` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "Aluno";
-
 -- CreateTable
 CREATE TABLE "usuario" (
     "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
-    "ra" TEXT NOT NULL,
+    "ra" TEXT,
     "cpf" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "imei" TEXT,
     "tipo" INTEGER NOT NULL DEFAULT 0,
     "status" INTEGER NOT NULL DEFAULT 0,
-    "data_cadastro" TIMESTAMP(3),
+    "data_cadastro" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "usuario_pkey" PRIMARY KEY ("id")
 );
@@ -120,6 +111,9 @@ CREATE UNIQUE INDEX "usuario_cpf_key" ON "usuario"("cpf");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "usuario_email_key" ON "usuario"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "usuario_imei_key" ON "usuario"("imei");
 
 -- AddForeignKey
 ALTER TABLE "disciplina" ADD CONSTRAINT "disciplina_id_curso_fkey" FOREIGN KEY ("id_curso") REFERENCES "curso"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
