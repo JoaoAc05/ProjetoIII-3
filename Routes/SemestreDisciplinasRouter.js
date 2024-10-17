@@ -6,9 +6,9 @@ const SemestreDisciplinasController = new semestreDisciplinasController();
 
 //Rotas Usuário (/Usuario)
 SemestreDisciplinasRouter.get('/', SemestreDisciplinasController.getAll); 
-SemestreDisciplinasRouter.get('/:id', SemestreDisciplinasController.getId); 
+SemestreDisciplinasRouter.get('/:id_semestre', SemestreDisciplinasController.getId); // ID DO SEMESTRE DO ANO
 SemestreDisciplinasRouter.post('/', SemestreDisciplinasController.cadastro); 
 SemestreDisciplinasRouter.put('/', SemestreDisciplinasController.alterar); 
-SemestreDisciplinasRouter.delete('/:id', SemestreDisciplinasController.deletar);
+SemestreDisciplinasRouter.delete('/:id', SemestreDisciplinasController.deletar); // ID PROPRIO
 
 export { SemestreDisciplinasRouter };

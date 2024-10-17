@@ -15,12 +15,12 @@ class semestreDisciplinasController {
     //Get de acordo com o ID do semestre do ano
     async getId(req, res) {
         const {
-            id
+            id_semestre
         } = req.params;
         try {
             const semestreDisciplinas = await prisma.semestreProfessorDisciplinas.findUnique({
                 where: {
-                    id_semestre: Number(id),
+                    id_semestre: Number(id_semestre),
                 },
             })
             res.status(200).json(semestreDisciplinas)
