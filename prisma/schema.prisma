@@ -38,7 +38,7 @@ model Semestre { // Semestre do Ano ( 2024/1 ou 2024/2 )
   descricao     String
   data_inicio   DateTime?
   data_final    DateTime?
-  padrao        Int // 0 - Sim , 1 - Não
+  padrao        Int       @default(1) // 0 - Sim , 1 - Não
 
   // Relacionamentos
   TurmaDisciplinas  TurmaDisciplinas[]

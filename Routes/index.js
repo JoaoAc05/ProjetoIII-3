@@ -2,6 +2,7 @@ import express from "express";
 import { UsuariosRouter } from "./UsuariosRouter.js";
 import { DisciplinasRouter } from "./DisciplinasRouter.js";
 import { CursosRouter } from "./CursosRouter.js";
+import { SemestresRouter } from "./SemestresRouter.js";
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get('/', (req, res, next) => {
 router.use("/usuarios", UsuariosRouter)
 router.use("/disciplinas", DisciplinasRouter)
 router.use("/cursos", CursosRouter)
+router.use("/semestres", SemestresRouter)
 
 export default router;
