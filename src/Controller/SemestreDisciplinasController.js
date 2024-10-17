@@ -18,11 +18,21 @@ class semestreDisciplinasController {
             id_semestre
         } = req.params;
         try {
-            const semestreDisciplinas = await prisma.semestreProfessorDisciplinas.findUnique({
+            const semestreDisciplinas = await prisma.semestreProfessorDisciplinas.findMany({
                 where: {
                     id_semestre: Number(id_semestre),
                 },
-            })
+            //     include: {
+            //         Disciplina: true,   // Inclui detalhes da Disciplina
+            //         Professor: true,    // Inclui detalhes do Professor
+            //         Semestre: true,     // Inclui detalhes do Semestre
+            //     },
+            });
+    
+            if (semestreDisciplinas.length === 0) {
+                return res.status(404).json({ message: 'Nenhuma disciplina encontrada para este semestre.' });
+            }
+
             res.status(200).json(semestreDisciplinas)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar disciplinas do professor: ' + e.message})
@@ -33,7 +43,26 @@ class semestreDisciplinasController {
 
     async cadastro(req, res) {
         try {
-            const createSemestreDisciplinas = await prisma.semestreProfessorDisciplinas.create({ data: req.body });
+            const { id_disciplina, id_professor, id_semestre } = req.body;
+
+        if (!id_disciplina || !id_professor || !id_semestre) {
+            return res.status(400).json({ message: 'Os campos id_disciplina, id_professor e id_semestre são obrigatórios.' });
+        }
+
+        const createSemestreDisciplinas = await prisma.semestreProfessorDisciplinas.create({
+            data: {
+                Disciplina: {
+                    connect: { id: id_disciplina }  // Conectando a uma Disciplina existente
+                },
+                Professor: {
+                    connect: { id: id_professor }   // Conectando a um Professor (Usuário) existente
+                },
+                Semestre: {
+                    connect: { id: id_semestre }    // Conectando a um Semestre existente
+                }
+            }
+        });
+
             res.status(201).json(createSemestreDisciplinas);
         } catch (e) {
             res.status(500).json({ message: 'Erro ao criar semestreDisciplinas: ' + e.message });
