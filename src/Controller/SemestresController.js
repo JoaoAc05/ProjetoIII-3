@@ -56,7 +56,7 @@ class semestresController {
                 return res.status(404).json({ message: 'Semestre não encontrado.' });
             }
     
-            res.status(200).json({ message: 'Semestrea alterado com sucesso.' });
+            res.status(200).json({ message: 'Semestre alterado com sucesso.' });
         } catch (e) {
             res.status(500).json({ message: 'Erro ao alterar semestre: ' + e.message });
         }

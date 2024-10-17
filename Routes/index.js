@@ -3,6 +3,8 @@ import { UsuariosRouter } from "./UsuariosRouter.js";
 import { DisciplinasRouter } from "./DisciplinasRouter.js";
 import { CursosRouter } from "./CursosRouter.js";
 import { SemestresRouter } from "./SemestresRouter.js";
+import { TurmasRouter } from "./TurmasRouter.js";
+import { SemestreDisciplinasRouter } from "./SemestreDisciplinasRouter.js";
 
 const router = express.Router();
 
@@ -18,5 +20,7 @@ router.use("/usuarios", UsuariosRouter)
 router.use("/disciplinas", DisciplinasRouter)
 router.use("/cursos", CursosRouter)
 router.use("/semestres", SemestresRouter)
+router.use("/turmas", TurmasRouter)
+router.use("/semestre/disciplinas", SemestreDisciplinasRouter)
 
 export default router;

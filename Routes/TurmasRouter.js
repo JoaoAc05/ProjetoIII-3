@@ -1,14 +1,14 @@
 import express from "express";
-import { semestresController } from "../src/Controller/SemestresController.js";
+import { turmasController } from "../src/Controller/TurmasController.js";
 
-const SemestresRouter = express.Router();
-const SemestresController = new semestresController();
+const TurmasRouter = express.Router();
+const TurmasController = new turmasController();
 
 //Rotas Usuário (/Usuario)
-SemestresRouter.get('/', SemestresController.getAll); 
-SemestresRouter.get('/:id', SemestresController.getId); 
-SemestresRouter.post('/', SemestresController.cadastro); 
-SemestresRouter.put('/', SemestresController.alterar); 
-SemestresRouter.delete('/:id', SemestresController.deletar);
+TurmasRouter.get('/', TurmasController.getAll); 
+TurmasRouter.get('/:id', TurmasController.getId); 
+TurmasRouter.post('/', TurmasController.cadastro); 
+TurmasRouter.put('/', TurmasController.alterar); 
+TurmasRouter.delete('/:id', TurmasController.deletar);
 
-export { SemestresRouter };
+export { TurmasRouter };
