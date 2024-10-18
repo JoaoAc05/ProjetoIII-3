@@ -27,8 +27,30 @@ class disciplinasController {
     };
 
     async cadastro(req, res, next) {
+        const { descricao, id_curso, carga_horario } = req.body;
         try {
-            const createDisciplinas = await prisma.disciplina.create({ data: req.body });
+            //Verifica se veio todas as informações
+            if (!descricao || !id_curso || !carga_horario) {
+                return res.status(400).json({ message: 'Os campos descricao, id_curso e carga_horario são obrigatórios.' });
+            }
+
+            // Verifica se o curso existe
+            const curso = await prisma.curso.findUnique({
+                where: { id: id_curso },
+            });
+            if (!curso) {
+                return res.status(404).json({ message: 'Curso não encontrado.' });
+            }
+
+            const createDisciplinas = await prisma.disciplina.create({
+                data: {
+                    descricao: descricao,
+                    Curso: {
+                        connect: { id: id_curso } 
+                    },
+                    carga_horario: carga_horario
+                }
+            });
             res.status(201).json(createDisciplinas);
         } catch (e) {
             res.status(500).json({ message: 'Erro ao criar disciplina: ' + e.message });

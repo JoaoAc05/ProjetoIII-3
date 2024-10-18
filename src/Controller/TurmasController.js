@@ -27,8 +27,29 @@ class turmasController {
     };
 
     async cadastro(req, res) {
+        const {semestre_curso, id_curso} = req.body
         try {
-            const createTurmas = await prisma.turma.create({ data: req.body });
+            //Verifica se veio todas as informações
+            if (!semestre_curso || !id_curso) {
+                return res.status(400).json({ message: 'Os campos semestre_curso e id_curso são obrigatórios.' });
+            }
+
+            // Verifica se o curso existe
+            const curso = await prisma.curso.findUnique({
+                where: { 
+                    id: id_curso 
+                },
+            });
+            if (!curso) {
+                return res.status(404).json({ message: 'Curso não encontrado.' });
+            }
+
+            const createTurmas = await prisma.turma.create({ 
+                semestre_curso: semestre_curso,
+                id_curso: {
+                    connect: {id: id_curso}
+                } 
+            });
             res.status(201).json(createTurmas);
         } catch (e) {
             res.status(500).json({ message: 'Erro ao criar turma: ' + e.message });

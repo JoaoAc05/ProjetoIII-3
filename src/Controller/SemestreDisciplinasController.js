@@ -6,9 +6,14 @@ class semestreDisciplinasController {
     async getAll(req, res) { 
         try {
             const semestreDisciplinas = await prisma.semestreProfessorDisciplinas.findMany()
+
+            if (semestreDisciplinas.length === 0) {
+                return res.status(404).json({ message: 'Nenhum vinculo encontrado.' });
+            }
+
             res.status(200).json(semestreDisciplinas);
         } catch (e) {
-            res.status(500).json({message: 'Erro ao retornar semestreDisciplinas: ' + e.message});
+            res.status(500).json({message: 'Erro ao retornar os vinculos de disciplina, semestre e professor: ' + e.message});
         }
     }
 
@@ -30,12 +35,12 @@ class semestreDisciplinasController {
             });
     
             if (semestreDisciplinas.length === 0) {
-                return res.status(404).json({ message: 'Nenhuma disciplina encontrada para este semestre.' });
+                return res.status(404).json({ message: 'Nenhum vinculo de disciplina encontrado deste semestre.' });
             }
 
             res.status(200).json(semestreDisciplinas)
         } catch (e) {
-            res.status(500).json({message: 'Erro ao retornar disciplinas do professor: ' + e.message})
+            res.status(500).json({message: 'Erro ao retornar disciplinas do semestre: ' + e.message})
         }
     };
 
@@ -45,20 +50,48 @@ class semestreDisciplinasController {
         try {
             const { id_disciplina, id_professor, id_semestre } = req.body;
 
-        if (!id_disciplina || !id_professor || !id_semestre) {
-            return res.status(400).json({ message: 'Os campos id_disciplina, id_professor e id_semestre são obrigatórios.' });
-        }
+            //Verifica se veio todas as informações
+            if (!id_disciplina || !id_professor || !id_semestre) {
+                return res.status(400).json({ message: 'Os campos id_disciplina, id_professor e id_semestre são obrigatórios.' });
+            }
 
-        const createSemestreDisciplinas = await prisma.semestreProfessorDisciplinas.create({
+            // Verifica se a disciplina existe
+            const disciplina = await prisma.disciplina.findUnique({
+                where: { id: id_disciplina },
+            });
+            if (!disciplina) {
+                return res.status(404).json({ message: 'Disciplina não encontrada.' });
+            }
+
+            // Verifica se o usuario existe e é um professor
+            const professor = await prisma.usuario.findUnique({
+                where: { id: id_professor },
+            });
+            if (!professor) {
+                return res.status(404).json({ message: 'Não encontrado usuario com o ID ' + id_professor });
+            }
+            if (professor.tipo !== 1) {
+                return res.status(400).json({ message: 'Usuário não é um professor.' });
+            }
+
+            // Verifica se o semestre existe
+            const semestre = await prisma.semestre.findUnique({
+                where: { id: id_semestre },
+            });
+            if (!semestre) {
+                return res.status(404).json({ message: 'Semestre não encontrado.' });
+            }
+
+            const createSemestreDisciplinas = await prisma.semestreProfessorDisciplinas.create({
             data: {
                 Disciplina: {
-                    connect: { id: id_disciplina }  // Conectando a uma Disciplina existente
+                    connect: { id: id_disciplina }
                 },
                 Professor: {
-                    connect: { id: id_professor }   // Conectando a um Professor (Usuário) existente
+                    connect: { id: id_professor } 
                 },
                 Semestre: {
-                    connect: { id: id_semestre }    // Conectando a um Semestre existente
+                    connect: { id: id_semestre } 
                 }
             }
         });
@@ -87,12 +120,12 @@ class semestreDisciplinasController {
             });
     
             if (updateSemestreDisciplinas.count === 0) {
-                return res.status(404).json({ message: 'Semestre não encontrado.' });
+                return res.status(404).json({ message: 'Vinculo semestre_disciplina não encontrado.' });
             }
     
-            res.status(200).json({ message: 'Semestre alterado com sucesso.' });
+            res.status(200).json({ message: 'Vinculo semestre_disciplina alterado com sucesso.' });
         } catch (e) {
-            res.status(500).json({ message: 'Erro ao alterar semestreDisciplinas: ' + e.message });
+            res.status(500).json({ message: 'Erro ao alterar vinculo semestre_disciplina: ' + e.message });
         }
     }
 

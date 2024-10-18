@@ -15,19 +15,19 @@ datasource db {
 model Usuario {
   id            Int       @id @default(autoincrement())
   nome          String
-  ra            String?    @unique // Registro do Aluno
+  ra            String?   @unique // Registro do Aluno
   cpf           String    @unique
   senha         String
   email         String    @unique
   imei          String?   @unique // Codigo indicador único do dispositivo
-  tipo          Int @default(0) // 0 - Aluno , 1 - Professor , 2 - Gerencial
-  status        Int @default(0) // 0 - Ativo , 1 - Inativo
-  data_cadastro DateTime @default(now())
+  tipo          Int       @default(0) // 0 - Aluno , 1 - Professor , 2 - Gerencial
+  status        Int       @default(0) // 0 - Ativo , 1 - Inativo
+  data_cadastro DateTime  @default(now())
 
   // Relacionamentos
-  TurmaAluno                TurmaAlunos[]
-  ChamadaProfessor          Chamada[]   @relation("ProfessorChamadas")
-  ChamadaAluno              ChamadaAlunos[]
+  TurmaAluno                  TurmaAlunos[]
+  ChamadaProfessor            Chamada[]   @relation("ProfessorChamadas")
+  ChamadaAluno                ChamadaAlunos[]
   SemestreDisciplinaProfessor SemestreProfessorDisciplinas[]
 
   @@map("usuario")
@@ -60,15 +60,15 @@ model Curso {
 }
 
 model Disciplina { // Matéria
-  id          Int       @id @default(autoincrement())
-  descricao   String
-  id_curso    Int
+  id            Int       @id @default(autoincrement())
+  descricao     String
+  id_curso      Int
   carga_horario Int
 
   // Relacionamentos
-  Curso       Curso      @relation(fields: [id_curso], references: [id])
-  TurmaDisciplinas  TurmaDisciplinas[]
-  Chamada     Chamada[]
+  Curso   Curso               @relation(fields: [id_curso], references: [id])
+  TurmaDisciplinas            TurmaDisciplinas[]
+  Chamada                     Chamada[]
   SemestreDisciplinaProfessor SemestreProfessorDisciplinas[]
 
   @@map("disciplina")
@@ -80,18 +80,18 @@ model Turma {
   id_curso      Int
 
   // Relacionamentos
-  Curso         Curso      @relation(fields: [id_curso], references: [id])
+  urso   Curso      @relation(fields: [id_curso], references: [id])
   TurmaDisciplinas  TurmaDisciplinas[]
-  TurmaAluno    TurmaAlunos[]
+  TurmaAluno        TurmaAlunos[]
 
   @@map("turma")
 }
 
 model TurmaDisciplinas {
-  id            Int       @id @default(autoincrement())
-  id_disciplina Int
-  id_semestre   Int // Semestre do ano ( 2024/1 ou 2024/2 )
-  id_turma      Int
+  id             Int       @id @default(autoincrement())
+  id_disciplina  Int
+  id_semestre    Int // Semestre do ano ( 2024/1 ou 2024/2 )
+  id_turma       Int
   semestre_curso Int // Número do semestre que a turma se encontra ( 1º, 2º, 3º, 4º ...)
 
   // Relacionamentos
