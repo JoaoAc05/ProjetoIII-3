@@ -59,10 +59,22 @@ class turmasController {
     async alterar(req, res) {
         const { id } = req.body;
         const dataToUpdate = req.body;
+        const { id_curso} = req.body
     
         // Verifica se o body está vazio
         if (Object.keys(dataToUpdate).length === 0) {
             return res.status(400).json({ error: 'Nenhum dado fornecido para atualização.' });
+        }
+
+        if (id_curso) {
+            const curso = await prisma.curso.findUnique({
+                where: { 
+                    id: id_curso 
+                },
+            });
+            if (!curso) {
+                return res.status(404).json({ message: 'Curso não encontrado.' });
+            }
         }
     
         try {

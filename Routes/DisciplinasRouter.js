@@ -4,7 +4,6 @@ import { disciplinasController } from "../src/Controller/DisciplinasController.j
 const DisciplinasRouter = express.Router();
 const DisciplinasController = new disciplinasController();
 
-//Rotas Usuário (/aluno)
 DisciplinasRouter.get('/', DisciplinasController.getAll);
 DisciplinasRouter.get('/:id', DisciplinasController.getId);
 DisciplinasRouter.post('/', DisciplinasController.cadastro); 

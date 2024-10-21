@@ -4,7 +4,6 @@ import { semestreDisciplinasController } from "../src/Controller/SemestreDiscipl
 const SemestreDisciplinasRouter = express.Router();
 const SemestreDisciplinasController = new semestreDisciplinasController();
 
-//Rotas Usuário (/Usuario)
 SemestreDisciplinasRouter.get('/', SemestreDisciplinasController.getAll); 
 SemestreDisciplinasRouter.get('/:id_semestre', SemestreDisciplinasController.getId); // ID DO SEMESTRE DO ANO
 SemestreDisciplinasRouter.post('/', SemestreDisciplinasController.cadastro); 

@@ -4,7 +4,6 @@ import { turmasController } from "../src/Controller/TurmasController.js";
 const TurmasRouter = express.Router();
 const TurmasController = new turmasController();
 
-//Rotas Usuário (/Usuario)
 TurmasRouter.get('/', TurmasController.getAll); 
 TurmasRouter.get('/:id', TurmasController.getId); 
 TurmasRouter.post('/', TurmasController.cadastro); 

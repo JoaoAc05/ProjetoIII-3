@@ -4,7 +4,6 @@ import { semestresController } from "../src/Controller/SemestresController.js";
 const SemestresRouter = express.Router();
 const SemestresController = new semestresController();
 
-//Rotas Usuário (/Usuario)
 SemestresRouter.get('/', SemestresController.getAll); 
 SemestresRouter.get('/:id', SemestresController.getId); 
 SemestresRouter.post('/', SemestresController.cadastro); 
