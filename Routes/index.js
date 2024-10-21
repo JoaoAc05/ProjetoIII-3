@@ -5,6 +5,7 @@ import { CursosRouter } from "./CursosRouter.js";
 import { SemestresRouter } from "./SemestresRouter.js";
 import { TurmasRouter } from "./TurmasRouter.js";
 import { SemestreDisciplinasRouter } from "./SemestreDisciplinasRouter.js";
+import { ChamadasRouter } from "./ChamadasRouter.js";
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use("/cursos", CursosRouter)
 router.use("/semestres", SemestresRouter)
 router.use("/turmas", TurmasRouter)
 router.use("/semestre/disciplinas", SemestreDisciplinasRouter)
+route.use("/chamadas", ChamadasRouter)
 
 export default router;
