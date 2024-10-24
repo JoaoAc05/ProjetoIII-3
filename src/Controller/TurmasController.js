@@ -5,7 +5,7 @@ class turmasController {
         try {
             const turmas = await prisma.turma.findMany()
             if (!turmas) {
-                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+                return res.status(404).json({message: 'Nenhum registro encontrado'})
             }
 
             res.status(200).json(turmas);

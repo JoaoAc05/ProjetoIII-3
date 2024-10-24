@@ -5,7 +5,7 @@ class usuariosController {
         try {
             const usuarios = await prisma.usuario.findMany()
             if (!usuarios) {
-                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+                return res.status(404).json({message: 'Nenhum registro encontrado'})
             }
 
             res.status(200).json(usuarios);

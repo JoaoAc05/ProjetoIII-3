@@ -5,7 +5,7 @@ class chamadasController {
         try {
             const chamadas = await prisma.chamada.findMany()
             if (!chamadas) {
-                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+                return res.status(404).json({message: 'Nenhum registro encontrado'})
             }
             res.status(200).json(chamadas);
         } catch (e) {
