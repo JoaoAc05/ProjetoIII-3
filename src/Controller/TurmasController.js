@@ -4,6 +4,10 @@ class turmasController {
     async getAll(req, res) { 
         try {
             const turmas = await prisma.turma.findMany()
+            if (!turmas) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+            }
+
             res.status(200).json(turmas);
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar turmas: ' + e.message});
@@ -11,15 +15,17 @@ class turmasController {
     }
 
     async getId(req, res) {
-        const {
-            id
-        } = req.params;
+        const { id } = req.params;
         try {
             const turma = await prisma.turma.findUnique({
                 where: {
                     id: Number(id),
                 },
             })
+            if (!turma) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro desta turma'})
+            }
+
             res.status(200).json(turma)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar turma: ' + e.message})

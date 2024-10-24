@@ -4,6 +4,10 @@ class disciplinasController {
     async getAll(req, res, next) { 
         try {
             const disciplinas = await prisma.disciplina.findMany()
+            if (!disciplinas) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+            }
+            
             res.status(200).json(disciplinas);
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar disciplinas: ' + e.message});
@@ -11,15 +15,17 @@ class disciplinasController {
     }
 
     async getId(req, res, next) {
-        const {
-            id
-        } = req.params;
+        const { id } = req.params;
         try {
             const disciplina = await prisma.disciplina.findUnique({
                 where: {
                     id: Number(id),
                 },
             })
+            if (!disciplina) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro desta disciplina'})
+            }
+
             res.status(200).json(disciplina)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar disciplina: ' + e.message})

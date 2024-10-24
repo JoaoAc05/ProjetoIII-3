@@ -4,6 +4,9 @@ class chamadasController {
     async getAll(req, res) { 
         try {
             const chamadas = await prisma.chamada.findMany()
+            if (!chamadas) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+            }
             res.status(200).json(chamadas);
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar chamadas: ' + e.message});
@@ -11,15 +14,16 @@ class chamadasController {
     }
 
     async getId(req, res) {
-        const {
-            id
-        } = req.params;
+        const { id } = req.params;
         try {
             const chamada = await prisma.chamada.findUnique({
                 where: {
                     id: Number(id),
                 },
             })
+            if (!chamada) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro desta chamada'})
+            }
             res.status(200).json(chamada)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar chamada: ' + e.message})
@@ -31,7 +35,7 @@ class chamadasController {
         try {
             //Verifica se veio todas as informações
             if (!id_professor || !id_disciplina || !id_semestre || !data_hora_inicio) {
-                return res.status(400).json({ message: 'Os campos id_professor, id_disciplina, id_semestre e data_hora_final são obrigatórios.' });
+                return res.status(400).json({ message: 'Os campos id_professor, id_disciplina, id_semestre e data_hora_inicio são obrigatórios.' });
             }
 
             // Verifica se o professor existe
@@ -129,14 +133,14 @@ class chamadasController {
                 where: {
                     id: Number(id),
                 },
-                data: dataToUpdate,  // Passa diretamente o req.body
+                data: dataToUpdate, 
             });
     
             if (updateChamadas.count === 0) {
                 return res.status(404).json({ message: 'Chamada não encontrada.' });
             }
     
-            res.status(200).json({ message: 'Chamada alterado com sucesso.' });
+            res.status(200).json({ message: 'Chamada alterada com sucesso.' });
         } catch (e) {
             res.status(500).json({ message: 'Erro ao alterar chamada: ' + e.message });
         }
@@ -150,9 +154,38 @@ class chamadasController {
                     id: Number(id), 
                 },
             })
-            res.status(200).json({sucesso: 'Semestre deletado com sucesso.'})
+            res.status(200).json({message: 'Chamada deletado com sucesso.'})
         } catch (e) {
-            res.status(500).json({error: 'Erro ao deletar chamada.' + e.message})
+            res.status(500).json({message: 'Erro ao deletar chamada.' + e.message})
+        }
+    }
+
+    async finalizarChamada(req, res) {
+        const {id, data_hora_final} = req.body
+
+        try {
+            const chamada = await prisma.chamada.findUnique({
+                where: {
+                    id: Number(id),
+                },
+            });
+            if (!chamada) {
+                return res.status(404).json({message: 'Chamada não encontrada para ser finalizada.'})
+            }
+            
+            if (chamada.data_hora_final){
+                return res.status(401).json({message: 'Chamada já finalizada.'})
+            }
+
+            const updateChamadas = await prisma.chamada.updateMany({
+                where: {
+                    id: Number(id),
+                },
+                data: data_hora_final,  
+            });
+            res.status(200).json({message: 'Chamada finalizada com sucesso.'})
+        } catch (e) {
+            res.status(500).json({error: 'Erro ao finalizar chamada.' + e.message})
         }
     }
 }

@@ -9,5 +9,6 @@ ChamadasRouter.get('/:id', ChamadasController.getId);
 ChamadasRouter.post('/', ChamadasController.cadastro); 
 ChamadasRouter.put('/', ChamadasController.alterar); 
 ChamadasRouter.delete('/:id', ChamadasController.deletar); 
+ChamadasRouter.post('/finalizar', ChamadasController.finalizarChamada);
 
 export { ChamadasRouter };

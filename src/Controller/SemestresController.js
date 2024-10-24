@@ -4,6 +4,10 @@ class semestresController {
     async getAll(req, res, next) { 
         try {
             const semestres = await prisma.semestre.findMany()
+            if (!semestres) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro'})
+            }
+
             res.status(200).json(semestres);
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar semestres: ' + e.message});
@@ -11,15 +15,17 @@ class semestresController {
     }
 
     async getId(req, res, next) {
-        const {
-            id
-        } = req.params;
+        const { id } = req.params;
         try {
             const semestre = await prisma.semestre.findUnique({
                 where: {
                     id: Number(id),
                 },
             })
+            if (!semestre) {
+                return res.status(404).json({message: 'Não encontrado nenhum registro deste semestre'})
+            }
+
             res.status(200).json(semestre)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar semestre: ' + e.message})
