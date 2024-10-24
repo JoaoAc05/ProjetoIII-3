@@ -134,7 +134,7 @@ class chamadaAlunosController {
         try {
             const updateChamadaAlunos = await prisma.chamadaAlunos.updateMany({
                 where: {
-                    id: Number(id),
+                    id_aluno: Number(id_aluno),
                 },
                 data: dataToUpdate,  // Passa diretamente o req.body
             });
