@@ -10,4 +10,4 @@ ChamadaAlunosRouter.post('/alunos', ChamadaAlunosController.presenca);
 ChamadaAlunosRouter.put('/alunos', ChamadaAlunosController.alterar); 
 ChamadaAlunosRouter.delete('/alunos/:id_aluno', ChamadaAlunosController.deletar); // Delete pelo ID do aluno
 
-export { chamadaAlunosController };
+export { ChamadaAlunosRouter };
