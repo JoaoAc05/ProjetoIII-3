@@ -24,7 +24,7 @@ router.use("/cursos", CursosRouter)
 router.use("/semestres", SemestresRouter)
 router.use("/turmas", TurmasRouter)
 router.use("/semestre/disciplinas", SemestreDisciplinasRouter)
-route.use("/chamadas", ChamadasRouter)
-route.use("/chamada", ChamadaAlunosRouter)
+router.use("/chamadas", ChamadasRouter)
+router.use("/chamada", ChamadaAlunosRouter)
 
 export default router;
