@@ -134,7 +134,7 @@ class chamadaAlunosController {
         try {
             const updateChamadaAlunos = await prisma.chamadaAlunos.updateMany({
                 where: {
-                    id_aluno: Number(id_aluno),
+                    id: Number(id),
                 },
                 data: dataToUpdate,  // Passa diretamente o req.body
             });
@@ -146,6 +146,23 @@ class chamadaAlunosController {
             res.status(200).json({ message: 'Curso alterado com sucesso.' });
         } catch (e) {
             res.status(500).json({ message: 'Erro ao alterar curso: ' + e.message });
+        }
+    }
+    
+    async deletar(req, res) {
+        const { id_aluno } = req.params;
+        try {
+            const deleteChamadaAluno = await prisma.chamadaAlunos.deleteMany({
+                where: { 
+                    id_aluno: Number(id_aluno), 
+                },
+            })
+            if (deleteChamadaAluno.count === 0) {
+                return res.status(404).json({ message: 'Registro de presença não encontrado.' });
+            }
+            res.status(200).json({message: 'Presença do aluno deletada com sucesso.'})
+        } catch (e) {
+            res.status(500).json({message: 'Erro ao deletar presença.' + e.message})
         }
     }
 }
