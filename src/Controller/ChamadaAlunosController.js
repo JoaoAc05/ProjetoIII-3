@@ -73,7 +73,7 @@ class chamadaAlunosController {
 
             const aluno = await prisma.usuario.findUnique({
                 where: {
-                    id: id_aluno
+                    id: Number(id_aluno)
                 }
             })
             if (!aluno) {
@@ -85,11 +85,21 @@ class chamadaAlunosController {
 
             const chamada = await prisma.chamada.findUnique({
                 where: {
-                    id: id_chamada
+                    id: Number(id_chamada)
                 }
             })
             if (!chamada) {
                 return res.status(404).json({message: 'Chamada não encontrada.'})
+            }
+
+            const presenca = await prisma.chamadaAlunos.findMany({
+                where:{
+                    id_aluno: id_aluno,
+                    id_chamada: id_chamada
+                }
+            })
+            if (presenca) {
+                return res.status(400).json({message: 'Aluno já está presente nesta chamada'})
             }
 
             const createChamadaAluno = await prisma.chamadaAlunos.create({ 
@@ -120,7 +130,7 @@ class chamadaAlunosController {
         if(id_chamada) {
             const chamada = await prisma.chamada.findUnique({
                 where:{
-                    id: id_chamada
+                    id: Number(id_chamada)
                 }
             })
             if (!chamada) {
@@ -132,7 +142,7 @@ class chamadaAlunosController {
         if (id_aluno) {
             const aluno = await prisma.usuario.findUnique({
                 where: {
-                    id: id_aluno
+                    id: Number(id_aluno)
                 }
             })
             if (!aluno) {
@@ -162,10 +172,11 @@ class chamadaAlunosController {
     }
     
     async deletar(req, res) {
-        const { id_aluno } = req.params;
+        const { id_chamada, id_aluno } = req.params;
         try {
             const deleteChamadaAluno = await prisma.chamadaAlunos.deleteMany({
                 where: { 
+                    id_chamada: Number(id_chamada),
                     id_aluno: Number(id_aluno), 
                 },
             })

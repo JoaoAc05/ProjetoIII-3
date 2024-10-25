@@ -1,7 +1,7 @@
 import { prisma } from "../prisma.js";
 
 class cursosController {
-    async getAll(req, res, next) { 
+    async getAll(req, res) { 
         try {
             const cursos = await prisma.curso.findMany()
             if (!cursos) {
@@ -14,7 +14,7 @@ class cursosController {
         }
     }
 
-    async getId(req, res, next) {
+    async getId(req, res) {
         const { id } = req.params;
         try {
             const curso = await prisma.curso.findUnique({
@@ -32,7 +32,7 @@ class cursosController {
         }
     };
 
-    async cadastro(req, res, next) {
+    async cadastro(req, res) {
         try {
             const createCursos = await prisma.curso.create({ data: req.body });
             res.status(201).json(createCursos);
@@ -41,7 +41,7 @@ class cursosController {
         }
     }
 
-    async alterar(req, res, next) {
+    async alterar(req, res) {
         const { id } = req.body;
         const dataToUpdate = req.body;
     
@@ -68,7 +68,7 @@ class cursosController {
         }
     }
 
-    async deletar(req, res, next) {
+    async deletar(req, res) {
         const { id } = req.params;
         try {
             const deleteCursos = await prisma.curso.deleteMany({

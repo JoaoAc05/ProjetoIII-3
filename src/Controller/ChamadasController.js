@@ -41,7 +41,7 @@ class chamadasController {
             // Verifica se o professor existe
             const professor = await prisma.usuario.findUnique({
                 where: { 
-                    id: id_professor
+                    id: Number(id_professor)
                 },
             });
             if (!professor) {
@@ -53,7 +53,9 @@ class chamadasController {
 
             // Verifica se a disciplina existe
             const disciplina = await prisma.disciplina.findUnique({
-                where: { id: id_disciplina },
+                where: { 
+                    id: Number(id_disciplina) 
+                },
             });
             if (!disciplina) {
                 return res.status(404).json({ message: 'Disciplina não encontrada.' });
@@ -61,7 +63,9 @@ class chamadasController {
 
             // Verifica se a semestre existe
             const semestre = await prisma.semestre.findUnique({
-                where: { id: id_semestre },
+                where: { 
+                    id: NUmber(id_semestre) 
+                },
             });
             if (!semestre) {
                 return res.status(404).json({ message: 'Semestre não encontrado.' });
@@ -102,7 +106,7 @@ class chamadasController {
         if (id_professor) {
             const professor = await prisma.usuario.findUnique({
                 where: { 
-                    id: id_professor
+                    id: Number(id_professor)
                 },
             });
             if (!professor) {
@@ -115,7 +119,9 @@ class chamadasController {
         
         if (id_disciplina) {
             const disciplina = await prisma.disciplina.findUnique({
-                where: { id: id_disciplina },
+                where: { 
+                    id: Number(id_disciplina) 
+                },
             });
             if (!disciplina) {
                 return res.status(404).json({ message: 'Disciplina não encontrada.' });
@@ -124,7 +130,9 @@ class chamadasController {
 
         if (id_semestre) {
             const semestre = await prisma.semestre.findUnique({
-                where: { id: id_semestre },
+                where: { 
+                    id: Number(id_semestre) 
+                },
             });
             if (!semestre) {
                 return res.status(404).json({ message: 'Semestre não encontrado.' });
