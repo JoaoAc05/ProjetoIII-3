@@ -1,7 +1,7 @@
 import { prisma } from "../prisma.js";
 
 class usuariosController {
-    async getAll(req, res, next) { 
+    async getAll(req, res) { 
         try {
             const usuarios = await prisma.usuario.findMany()
             if (!usuarios) {
@@ -14,7 +14,7 @@ class usuariosController {
         }
     }
 
-    async getId(req, res, next) {
+    async getId(req, res) {
         const {
             id
         } = req.params;
@@ -34,7 +34,7 @@ class usuariosController {
         }
     };
 
-    async cadastro(req, res, next) {
+    async cadastro(req, res) {
         try {
             const createUsuario = await prisma.usuario.create({ data: req.body });
             res.status(201).json(createUsuario);
@@ -43,7 +43,7 @@ class usuariosController {
         }
     }
 
-    async alterar(req, res, next) {
+    async alterar(req, res) {
         const { id } = req.body;
         const dataToUpdate = req.body;
     
@@ -70,7 +70,7 @@ class usuariosController {
         }
     }
 
-    async deletar(req, res, next) {
+    async deletar(req, res) {
         const { id } = req.params;
         try {
             const deleteUsuarios = await prisma.usuario.deleteMany({
@@ -84,7 +84,7 @@ class usuariosController {
         }
     }
 
-    async loginAluno(req, res, next) {
+    async loginAluno(req, res) {
         const { imei, email, senha } = req.body;
     
         try {
@@ -135,7 +135,7 @@ class usuariosController {
         }
     }
 
-    async loginWeb(req, res, next) {
+    async loginWeb(req, res) {
         const { email, senha } = req.body;
     
         try {

@@ -44,9 +44,11 @@ class chamadaAlunosController {
             // Obtém a hora atual do servidor (VERCEL É FUSO WHASHINGTON)
             const serverTime = new Date();
 
+            const brazilTime = new Date(serverTime.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+
             // Converte as duas datas para o mesmo fuso horário (UTC)
             const postTime = new Date(hora_post);
-            const timeDifference = Math.abs(postTime - serverTime);
+            const timeDifference = Math.abs(postTime - brazilTime);
 
             // Verifica se a diferença é maior que 5 segundos
             if (timeDifference > 5000) {
