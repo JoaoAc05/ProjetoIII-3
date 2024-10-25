@@ -173,6 +173,8 @@ class chamadaAlunosController {
     
     async deletar(req, res) {
         const { id_chamada, id_aluno } = req.params;
+        console.log(id_chamada)
+        console.log(id_aluno)
         try {
             const deleteChamadaAluno = await prisma.chamadaAlunos.deleteMany({
                 where: { 
