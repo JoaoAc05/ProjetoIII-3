@@ -48,7 +48,13 @@ class chamadaAlunosController {
             const postTime = new Date(hora_post);
                         
             // (SEGUNDOS SERVIDOR - SEGUNDOS POST) + 60 * (MINUTOS SERVIDOR - MINUTOS POST)
-            //EX: Horario Servidor = 
+            //EX: Horário Servidor = 13:01:58
+            // Horário Post = 13:02:02
+            // Segundos - Segundos ( 58 - 2 = 56)
+            // Minutos  - Minutos ( 1 - 2 = -1)
+            // Minutos Res * 60 ( -1 * 60 = -60)
+            // Segundos Res + Minutos Res ( 56 + (-60) = -4)
+            // RESULTADO = 4 segundos de diferenca
             const secondsDifference = Math.abs(serverTime.getUTCSeconds() - postTime.getUTCSeconds() + 60 * (serverTime.getUTCMinutes() - postTime.getUTCMinutes()));
     
             // Verifica se a diferença em segundos é maior que 5
