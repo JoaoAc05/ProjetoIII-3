@@ -92,7 +92,7 @@ class chamadaAlunosController {
                 return res.status(404).json({message: 'Chamada não encontrada.'})
             }
 
-            const presenca = await prisma.chamadaAlunos.findMany({
+            const presenca = await prisma.chamadaAlunos.findFirst({
                 where:{
                     id_aluno: id_aluno
                 }
