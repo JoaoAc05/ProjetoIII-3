@@ -94,7 +94,8 @@ class chamadaAlunosController {
 
             const presenca = await prisma.chamadaAlunos.findFirst({
                 where:{
-                    id_aluno: id_aluno
+                    id_aluno: Number(id_aluno),
+                    id_chamada: Number(id_chamada)
                 }
             })
             if (presenca) {
@@ -172,8 +173,6 @@ class chamadaAlunosController {
     
     async deletar(req, res) {
         const { id_chamada, id_aluno } = req.params;
-        console.log(id_chamada)
-        console.log(id_aluno)
         try {
             const deleteChamadaAluno = await prisma.chamadaAlunos.deleteMany({
                 where: { 
