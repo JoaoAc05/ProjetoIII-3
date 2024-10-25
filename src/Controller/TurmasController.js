@@ -50,6 +50,17 @@ class turmasController {
                 return res.status(404).json({ message: 'Curso não encontrado.' });
             }
 
+
+            const turma = await prisma.turma.findMany({
+                where: {
+                    id_curso: id_curso,
+                    semestre_curso: semestre_curso
+                }
+            })
+            if (turma) {
+                return res.status(401).json({message: 'Já existe uma turma deste curso neste semestre'})
+            }
+            
             const createTurmas = await prisma.turma.create({ 
                 data: {
                     semestre_curso: semestre_curso,
