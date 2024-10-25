@@ -80,7 +80,7 @@ model Turma {
   id_curso      Int
 
   // Relacionamentos
-  urso   Curso      @relation(fields: [id_curso], references: [id])
+  Curso   Curso      @relation(fields: [id_curso], references: [id])
   TurmaDisciplinas  TurmaDisciplinas[]
   TurmaAluno        TurmaAlunos[]
 
