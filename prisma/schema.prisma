@@ -138,7 +138,7 @@ model ChamadaAlunos {
 
   // Relacionamentos
   Chamada     Chamada    @relation(fields: [id_chamada], references: [id])
-  Usuario     Usuario    @relation(fields: [id_aluno], references: [id])
+  Aluno     Usuario    @relation(fields: [id_aluno], references: [id])
 
   @@map("chamada_alunos")
 }

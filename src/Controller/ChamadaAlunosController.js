@@ -87,7 +87,7 @@ class chamadaAlunosController {
                    Chamada: {
                         connect: {id: id_chamada}
                     } ,
-                    Usuario: {
+                    Aluno: {
                         connect: {id: id_aluno}
                     }, 
                 }
