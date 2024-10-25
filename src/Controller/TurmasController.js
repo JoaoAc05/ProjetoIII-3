@@ -51,10 +51,12 @@ class turmasController {
             }
 
             const createTurmas = await prisma.turma.create({ 
-                semestre_curso: semestre_curso,
-                Curso: {
-                    connect: {id: id_curso}
-                } 
+                data: {
+                    semestre_curso: semestre_curso,
+                    Curso: {
+                        connect: {id: id_curso}
+                    } 
+                }
             });
             res.status(201).json(createTurmas);
         } catch (e) {
