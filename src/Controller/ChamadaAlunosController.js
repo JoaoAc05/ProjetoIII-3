@@ -94,8 +94,7 @@ class chamadaAlunosController {
 
             const presenca = await prisma.chamadaAlunos.findMany({
                 where:{
-                    id_aluno: id_aluno,
-                    id_chamada: id_chamada
+                    id_aluno: id_aluno
                 }
             })
             if (presenca) {
