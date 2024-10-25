@@ -68,13 +68,13 @@ class chamadasController {
             }
 
             const createChamadas = await prisma.chamada.create({ 
-                id_professor: {
+                Usuario: {
                     connect: {id: id_professor}
                 },
-                id_disciplina: {
+                Disciplina: {
                     connect: {id: id_disciplina}
                 } ,
-                id_semestre: {
+                Semestre: {
                     connect: {id: id_semestre}
                 },
                 data_hora_inicio: data_hora_inicio,

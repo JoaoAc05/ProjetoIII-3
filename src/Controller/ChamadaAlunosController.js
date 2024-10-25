@@ -83,10 +83,10 @@ class chamadaAlunosController {
             }
 
             const createChamadaAluno = await prisma.chamadaAlunos.create({ 
-                id_chamada: {
+                Chamada: {
                     connect: {id: id_chamada}
                 } ,
-                id_aluno: {
+                Usuario: {
                     connect: {id: id_aluno}
                 },
              }); 
