@@ -68,17 +68,20 @@ class chamadasController {
             }
 
             const createChamadas = await prisma.chamada.create({ 
-                Usuario: {
-                    connect: {id: id_professor}
-                },
-                Disciplina: {
-                    connect: {id: id_disciplina}
-                } ,
-                Semestre: {
-                    connect: {id: id_semestre}
-                },
-                data_hora_inicio: data_hora_inicio,
-                data_hora_final: data_hora_final
+                data: {
+                   Usuario: {
+                        connect: {id: id_professor}
+                    },
+                    Disciplina: {
+                        connect: {id: id_disciplina}
+                    } ,
+                    Semestre: {
+                        connect: {id: id_semestre}
+                    },
+                    data_hora_inicio: data_hora_inicio,
+                    data_hora_final: data_hora_final 
+                }
+                
             });
             res.status(201).json(createChamadas);
         } catch (e) {
