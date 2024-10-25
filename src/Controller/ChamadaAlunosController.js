@@ -48,20 +48,32 @@ class chamadaAlunosController {
             const postTime = new Date(hora_post);
 
             // Converte ambos para UTC para alinhar os fusos horários
-            const serverTimeUTC = new Date(serverTime.toISOString());
-            const postTimeUTC = new Date(postTime.toISOString());
+            // const serverTimeUTC = new Date(serverTime.toISOString());
+            // const postTimeUTC = new Date(postTime.toISOString());
 
 
-            const timeDifference = Math.abs(postTimeUTC - serverTimeUTC);
-
-            // Verifica se a diferença é maior que 5 segundos
-            if (timeDifference > 5000) {
+            if (
+                serverTime.getUTCMinutes() !== postTime.getUTCMinutes() ||
+                Math.abs(serverTime.getUTCSeconds() - postTime.getUTCSeconds()) > 5
+            ) {
                 return res.status(400).json({
-                    message: 'Horário do aluno é inválido.',
-                    serverTime: serverTimeUTC.toISOString(),
-                    postTime: postTimeUTC.toISOString(),
+                    message: 'Horário do aluno é inválido. Teste',
+                    serverTime: serverTime.toISOString(),
+                    postTime: postTime.toISOString(),
                 });
             }
+
+
+            // const timeDifference = Math.abs(postTimeUTC - serverTimeUTC);
+
+            // // Verifica se a diferença é maior que 5 segundos
+            // if (timeDifference > 5000) {
+            //     return res.status(400).json({
+            //         message: 'Horário do aluno é inválido.',
+            //         serverTime: serverTimeUTC.toISOString(),
+            //         postTime: postTimeUTC.toISOString(),
+            //     });
+            // }
 
             if (!id_aluno || !id_chamada) {
                 return res.status(400).json({ message: 'Os campos id_aluno e id_chamada são obrigatórios.' });
