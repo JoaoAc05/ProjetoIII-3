@@ -27,7 +27,7 @@ router.use("/semestres", SemestresRouter)
 router.use("/turmas", TurmasRouter)
 router.use("/turma/alunos", TurmaAlunosRouter)
 router.use("/turma/disciplinas", TurmaDisciplinasRouter)
-router.use("/semestre/disciplinas", SemestreDisciplinasRouter)
+router.use("/semestre", SemestreDisciplinasRouter)
 router.use("/chamadas", ChamadasRouter)
 router.use("/chamada", ChamadaAlunosRouter)
 
