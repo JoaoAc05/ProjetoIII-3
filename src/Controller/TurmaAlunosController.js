@@ -4,9 +4,6 @@ class turmaAlunosController {
     async getAll(req, res) { 
         try {
             const turmas = await prisma.turmaAlunos.findMany()
-            if (!turmas) {
-                return res.status(404).json({message: 'Nenhum registro encontrado'})
-            }
 
             res.status(200).json(turmas);
         } catch (e) {
@@ -106,7 +103,7 @@ class turmaAlunosController {
                 },
             });
             if (!turma) {
-                return res.status(404).json({ message: 'Turma não encontrado.' });
+                return res.status(404).json({ message: 'Turma não encontrada.' });
             }
         }
 
@@ -125,14 +122,14 @@ class turmaAlunosController {
         }
     
         try {
-            const updateTurmas = await prisma.turmaAlunos.updateMany({
+            const updateTurmaAlunos = await prisma.turmaAlunos.updateMany({
                 where: {
                     id: Number(id),
                 },
                 data: dataToUpdate,
             });
     
-            if (updateTurmas.count === 0) {
+            if (updateTurmaAlunos.count === 0) {
                 return res.status(404).json({ message: 'Vinculo Aluno Turma não encontrado.' });
             }
     
@@ -144,6 +141,16 @@ class turmaAlunosController {
 
     async deletar(req, res) {
         const { id_aluno } = req.params;
+
+        const alunoTurma = await prisma.turmaAlunos.findFirst({
+            where: {
+                id_aluno: Number(id_aluno)
+            }
+        })
+        if (!alunoTurma) {
+            return res.status(404).json({message: 'Este aluno não pertence a nenhuma turma'})
+        }
+
         try {
             const deleteTurmas = await prisma.turmaAlunos.deleteMany({
                 where: { 

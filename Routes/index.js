@@ -5,6 +5,7 @@ import { CursosRouter } from "./CursosRouter.js";
 import { SemestresRouter } from "./SemestresRouter.js";
 import { TurmasRouter } from "./TurmasRouter.js";
 import { TurmaAlunosRouter } from "./TurmaAlunosRouter.js";
+import { TurmaDisciplinasRouter } from "./TurmaDisciplinasRouter.js";
 import { SemestreDisciplinasRouter } from "./SemestreDisciplinasRouter.js";
 import { ChamadasRouter } from "./ChamadasRouter.js";
 import { ChamadaAlunosRouter } from "./ChamadaAlunosRouter.js"
@@ -25,6 +26,7 @@ router.use("/cursos", CursosRouter)
 router.use("/semestres", SemestresRouter)
 router.use("/turmas", TurmasRouter)
 router.use("/turma/alunos", TurmaAlunosRouter)
+router.use("/turma/disciplinas", TurmaDisciplinasRouter)
 router.use("/semestre/disciplinas", SemestreDisciplinasRouter)
 router.use("/chamadas", ChamadasRouter)
 router.use("/chamada", ChamadaAlunosRouter)
