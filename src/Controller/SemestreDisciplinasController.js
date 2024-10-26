@@ -88,6 +88,16 @@ class semestreDisciplinasController {
                 return res.status(404).json({ message: 'Semestre não encontrado.' });
             }
 
+            const disciplinaSemestre = await prisma.semestreProfessorDisciplinas.findFirst({
+                where: {
+                    id_disciplina: Number(id_disciplina),
+                    id_semestre: Number(id_semestre)
+                }
+            })
+            if (disciplinaSemestre) {
+                return res.status(401).json({message: 'Essa disciplina já está sendo regida neste semestre'})
+            }
+
             const createSemestreDisciplinas = await prisma.semestreProfessorDisciplinas.create({
             data: {
                 Disciplina: {
