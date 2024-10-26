@@ -51,7 +51,7 @@ class turmaAlunosController {
             }
 
 
-            const aluno = await prisma.usuario.findMany({
+            const aluno = await prisma.usuario.findUnique({
                 where: {
                     id: Number(id_aluno)
                 }
