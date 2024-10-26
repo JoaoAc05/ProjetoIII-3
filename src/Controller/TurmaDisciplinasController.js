@@ -30,7 +30,7 @@ class turmaDisciplinasController {
     };
 
     async cadastro(req, res) {
-        const {id_turma, id_disciplina, id_semestre} = req.body
+        const {id_turma, id_disciplina, id_semestre, semestre_curso} = req.body
         try {
             //Verifica se veio todas as informações
             if (!id_turma || !id_disciplina || !id_semestre) {
@@ -76,7 +76,7 @@ class turmaDisciplinasController {
                     Semestre: {
                         connect: {id: id_semestre}
                     },
-                    semestre_curso: semestre_curso
+                    semestre_curso: semestre_curso // Verificar necessidade deste campo!!!!!
                 }
             });
             res.status(201).json(createTurmaDisicplinas);
