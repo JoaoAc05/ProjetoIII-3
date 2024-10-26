@@ -65,6 +65,16 @@ class turmaDisciplinasController {
                 return res.status(404).json({message: 'Semestre não encontrado'})
             }
 
+            const disciplinaTurma = await prisma.turmaDisciplinas.findFirst({
+                where: {
+                    id_disciplina: Number(id_disciplina),
+                    id_turma: Number(id_turma)
+                }
+            })
+            if (disciplinaTurma) {
+                return res.status(401).json({message: 'Esta disciplina já está vinculada a está turma'})
+            }
+
             const createTurmaDisicplinas = await prisma.turmaDisciplinas.create({ 
                 data: {
                     Disciplina: {
