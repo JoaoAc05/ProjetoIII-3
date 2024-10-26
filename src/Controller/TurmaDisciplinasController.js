@@ -75,7 +75,8 @@ class turmaDisciplinasController {
                     },
                     Semestre: {
                         connect: {id: id_semestre}
-                    }
+                    },
+                    semestre_curso: semestre_curso
                 }
             });
             res.status(201).json(createTurmaDisicplinas);
