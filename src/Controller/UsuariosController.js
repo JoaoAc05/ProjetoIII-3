@@ -119,11 +119,13 @@ class usuariosController {
                     },
                 });
     
-                return res.status(200).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
+                // return res.status(200).json({ message: 'Login bem-sucedido. IMEI inserido com sucesso.' });
+                return res.status(200).json({usuario});
     
             } else if (imei === usuario.imei) {
                 // IMEI já cadastrado no banco de dados
-                return res.status(200).json({ message: 'Login bem-sucedido. IMEI já cadastrado.' });
+                // return res.status(200).json({ message: 'Login bem-sucedido. IMEI já cadastrado.' });
+                return res.status(200).json({usuario});
             } else {
                 // IMEI diferente ou inválido
                 return res.status(401).json({ message: 'IMEI diferente do usuário ou inválido.' });
