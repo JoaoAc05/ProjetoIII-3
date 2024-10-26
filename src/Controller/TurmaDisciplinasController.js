@@ -33,7 +33,7 @@ class turmaDisciplinasController {
         const {id_turma, id_disciplina, id_semestre} = req.body
         try {
             //Verifica se veio todas as informações
-            if (!id_turma || !id_aluno) {
+            if (!id_turma || !id_disciplina || !id_semestre) {
                 return res.status(400).json({ message: 'Os campos id_turma, id_disciplina e id_semestre são obrigatórios.' });
             }
 
