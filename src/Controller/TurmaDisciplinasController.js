@@ -96,7 +96,7 @@ class turmaDisciplinasController {
         if (id_turma) {
             const turma = await prisma.turma.findUnique({
                 where: { 
-                    id: id_turma 
+                    id: Number(id_turma) 
                 },
             });
             if (!turma) {
@@ -150,7 +150,7 @@ class turmaDisciplinasController {
             })
             res.status(200).json({sucesso: 'Vinculo Disciplina Turma deletado com sucesso.'})
         } catch (e) {
-            res.status(500).json({error: 'Erro ao deletar vinculo disciplina turma.' + e.message})
+            res.status(500).json({error: 'Erro ao deletar vinculo disciplina turma: ' + e.message})
         }
     }
 }

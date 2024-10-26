@@ -123,7 +123,7 @@ class turmasController {
             })
             res.status(200).json({sucesso: 'Turma deletado com sucesso.'})
         } catch (e) {
-            res.status(500).json({error: 'Erro ao deletar turma.' + e.message})
+            res.status(500).json({error: 'Erro ao deletar turma: ' + e.message})
         }
     }
 }

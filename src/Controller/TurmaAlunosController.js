@@ -159,7 +159,7 @@ class turmaAlunosController {
             })
             res.status(200).json({sucesso: 'Vinculo Aluno Turma deletado com sucesso.'})
         } catch (e) {
-            res.status(500).json({error: 'Erro ao deletar vinculo aluno turma.' + e.message})
+            res.status(500).json({error: 'Erro ao deletar vinculo aluno turma: ' + e.message})
         }
     }
 }
