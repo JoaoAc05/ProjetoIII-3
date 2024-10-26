@@ -4,9 +4,7 @@ class chamadasController {
     async getAll(req, res) { 
         try {
             const chamadas = await prisma.chamada.findMany()
-            if (!chamadas) {
-                return res.status(404).json({message: 'Nenhum registro encontrado'})
-            }
+            
             res.status(200).json(chamadas);
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar chamadas: ' + e.message});
@@ -21,9 +19,7 @@ class chamadasController {
                     id: Number(id),
                 },
             })
-            if (!chamada) {
-                return res.status(404).json({message: 'Não encontrado nenhum registro desta chamada'})
-            }
+
             res.status(200).json(chamada)
         } catch (e) {
             res.status(500).json({message: 'Erro ao retornar chamada: ' + e.message})

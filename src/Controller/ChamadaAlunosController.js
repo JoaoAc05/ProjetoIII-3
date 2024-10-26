@@ -4,9 +4,6 @@ class chamadaAlunosController {
     async getAll(req, res) { 
         try {
             const chamadasAlunos = await prisma.chamadaAlunos.findMany()
-            if (!chamadasAlunos) {
-                return res.status(404).json({message: 'Nenhum registro encontrado'})
-            }
 
             res.status(200).json(chamadasAlunos);
         } catch (e) {
@@ -22,9 +19,6 @@ class chamadaAlunosController {
                     id_chamada: Number(id_chamada),
                 },
             })
-            if (!chamadaAlunos) {
-                return res.status(404).json({message: 'Não encontrado nenhum registro para esta chamada'})
-            }
 
             res.status(200).json(chamadaAlunos)
         } catch (e) {

@@ -76,9 +76,8 @@ class turmasController {
     }
 
     async alterar(req, res) {
-        const { id } = req.body;
+        const { id, id_curso } = req.body;
         const dataToUpdate = req.body;
-        const { id_curso} = req.body
     
         // Verifica se o body está vazio
         if (Object.keys(dataToUpdate).length === 0) {
@@ -122,7 +121,7 @@ class turmasController {
                     id: Number(id), 
                 },
             })
-            res.status(200).json({sucesso: 'Semestre deletado com sucesso.'})
+            res.status(200).json({sucesso: 'Turma deletado com sucesso.'})
         } catch (e) {
             res.status(500).json({error: 'Erro ao deletar turma.' + e.message})
         }
