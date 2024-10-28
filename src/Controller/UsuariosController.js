@@ -86,6 +86,7 @@ class usuariosController {
 
     async loginAluno(req, res) {
         const { imei, email, senha } = req.body;
+        
     
         try {
             // Verifica se os campos estão preenchidos
@@ -106,7 +107,18 @@ class usuariosController {
             // Compara a senha da req com a senha do banco de dados
             if (senha !== usuario.senha) {
                 return res.status(401).json({ message: 'Senha incorreta.' });
-            }
+            } 
+            
+            // const chavePrivada = "Fasipe2024"
+            // else {
+            //     jwt.sign(usuario, chavePrivada, (err, token) => {
+            //         if (err) {
+            //             res.status(500).json({message: 'Erro ao gerar JWT'});
+            //             return;
+            //         }
+            //         res.status(200).json({token})
+            //     })
+            // }
     
             // Se o usuário não possui IMEI, atualiza o IMEI
             if (!usuario.imei) {
@@ -125,7 +137,7 @@ class usuariosController {
             } else if (imei === usuario.imei) {
                 // IMEI já cadastrado no banco de dados
                 // return res.status(200).json({ message: 'Login bem-sucedido. IMEI já cadastrado.' });
-                return res.status(200).json({usuario});
+                
             } else {
                 // IMEI diferente ou inválido
                 return res.status(401).json({ message: 'IMEI diferente do usuário ou inválido.' });
